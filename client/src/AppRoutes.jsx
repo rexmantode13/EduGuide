@@ -16,6 +16,7 @@ import StudentProfile from './views/student/StudentProfile';
 import ReviewQueue from './views/staff/ReviewQueue';
 import CounselorDashboard from './views/counselor/CounselorDashboard';
 import ActivityHubView from './views/activities/ActivityHubView';
+import Developer from './views/developer/Developer';
 
 export default function AppRoutes() {
   const { user } = useAuth();
@@ -49,6 +50,9 @@ export default function AppRoutes() {
       
       <Route path="/login/staff" element={user ? <Navigate to="/" replace /> : <StaffLogin />} />
       <Route path="/login/student" element={user ? <Navigate to="/" replace /> : <StudentLogin />} />
+
+      {/* Public Developer Page */}
+      <Route path="/developer" element={<Developer />} />
 
       {/* Protected Admin Routes */}
       <Route 

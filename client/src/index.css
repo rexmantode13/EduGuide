@@ -1,3 +1,6 @@
+@tailwind components;
+@tailwind utilities;
+
 /* ==========================================================================
    EduGuide AI — Minimal Classic Design System Tokens & Base Styles
    (Ocean Blue & Vibrant Indigo Palette derived from EduGuide Logo)

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { GraduationCap, Briefcase, ArrowRight, Shield, UserCheck, School, X } from 'lucide-react';
+import { GraduationCap, Briefcase, ArrowRight, Shield, UserCheck, School, X, Code } from 'lucide-react';
 import '../../styles/auth.css';
 
 export default function RoleSelection() {
@@ -58,6 +58,13 @@ export default function RoleSelection() {
               <ArrowRight size={12} />
             </div>
           </div>
+        </div>
+
+        <div style={{ marginTop: '2.5rem', display: 'flex', justifyContent: 'center' }}>
+          <Link to="/developer" style={{ textDecoration: 'none', color: '#64748B', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 500, transition: 'color 0.2s ease', padding: '0.5rem 1rem', borderRadius: '8px', background: '#F8FAFC', border: '1px solid #E2E8F0' }} onMouseOver={(e) => { e.currentTarget.style.color = '#0F172A'; e.currentTarget.style.background = '#F1F5F9'; e.currentTarget.style.borderColor = '#CBD5E1'; }} onMouseOut={(e) => { e.currentTarget.style.color = '#64748B'; e.currentTarget.style.background = '#F8FAFC'; e.currentTarget.style.borderColor = '#E2E8F0'; }}>
+            <Code size={18} />
+            <span>Developer Page</span>
+          </Link>
         </div>
 
         {/* Staff Role Modal */}

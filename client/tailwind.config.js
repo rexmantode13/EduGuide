@@ -6,11 +6,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        'theme-cream': '#f4f1ea',
-        'theme-charcoal': '#1c1c1c'
+        'brand-navy': '#0F172A',
+        'brand-blue': '#4F46E5',
+        'bg-ambient': '#FAFBFC',
+        'slate-800': '#1E293B',
       },
       fontFamily: {
-        serif: ['Playfair Display', 'serif'],
+        heading: ['Outfit', 'Inter', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       }
     },

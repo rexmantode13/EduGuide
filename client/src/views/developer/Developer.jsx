@@ -80,7 +80,7 @@ const TEAM_MEMBERS = [
 
 export default function Developer() {
   const [selectedId, setSelectedId] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(1); // Start at index 1 to match "2 / 8" visually
+  const [currentIndex, setCurrentIndex] = useState(1);
 
   const selectedMember = TEAM_MEMBERS.find(m => m.id === selectedId);
 
@@ -107,7 +107,7 @@ export default function Developer() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f4f1ea] text-[#1c1c1c] font-sans overflow-hidden flex flex-col p-6 lg:p-10 relative">
+    <div className="min-h-screen bg-bg-ambient text-brand-navy font-sans overflow-hidden flex flex-col p-6 lg:p-10 relative">
       <AnimatePresence>
         {!selectedId ? (
           <motion.div
@@ -120,17 +120,15 @@ export default function Developer() {
             {/* Header */}
             <header className="flex justify-between items-center mb-10 text-[10px] lg:text-xs font-semibold tracking-widest uppercase">
               <div className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-full border border-gray-400 flex items-center justify-center">
-                   <div className="w-4 h-4 rounded-full border border-gray-400"></div>
-                </div>
-                <span>ARX CARE</span>
+                <img src="/logo.png" alt="EduGuide Logo" className="w-6 h-6 object-contain" />
+                <span className="text-brand-navy">EDUGUIDE AI</span>
               </div>
-              <div className="cursor-pointer hover:opacity-70">
+              <div className="cursor-pointer hover:opacity-70 text-brand-navy">
                 <Menu size={18} />
               </div>
-              <div className="flex gap-8 hidden md:flex">
-                <span className="cursor-pointer hover:opacity-70">Contact</span>
-                <span className="cursor-pointer hover:opacity-70">Book a Visit</span>
+              <div className="flex gap-8 hidden md:flex text-slate-800">
+                <span className="cursor-pointer hover:text-brand-blue transition-colors">Home</span>
+                <span className="cursor-pointer hover:text-brand-blue transition-colors">Portals</span>
               </div>
             </header>
 
@@ -140,15 +138,15 @@ export default function Developer() {
               {/* Left Column (Fixed Text) */}
               <div className="absolute left-0 top-0 w-full lg:w-1/3 h-full flex flex-col justify-between pointer-events-none z-10">
                 <div className="pt-4 lg:pt-12 pointer-events-auto">
-                  <h1 className="font-serif text-[4rem] md:text-[6rem] lg:text-[7.5rem] leading-[0.95] tracking-tight">
+                  <h1 className="font-heading text-[4rem] md:text-[6rem] lg:text-[7.5rem] leading-[0.95] tracking-tight text-brand-navy">
                     MEET<br />
-                    <span className="text-[#b8bfa3] italic font-light">OUR</span><br />
+                    <span className="text-brand-blue font-light italic">OUR</span><br />
                     TEAM
                   </h1>
                 </div>
                 <div className="pb-8 pointer-events-auto">
-                  <p className="max-w-xs text-xs lg:text-sm text-[#4a4a4a] leading-relaxed">
-                    When you need fast and effective medical services, you can trust our team at ARX Care Clinic.
+                  <p className="max-w-xs text-xs lg:text-sm text-slate-600 leading-relaxed font-medium">
+                    Behind every intelligent experience is a team turning ideas, technology and curiosity into meaningful learning experiences.
                   </p>
                 </div>
               </div>
@@ -172,7 +170,7 @@ export default function Developer() {
                           opacity: style.opacity
                         }}
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                        className={`absolute w-full h-full origin-left shadow-xl bg-gray-200 ${isActive ? 'cursor-pointer group' : ''}`}
+                        className={`absolute w-full h-full origin-left shadow-2xl rounded-xl overflow-hidden bg-slate-200 ${isActive ? 'cursor-pointer group' : ''}`}
                         onClick={() => isActive && setSelectedId(member.id)}
                       >
                         <motion.img
@@ -182,13 +180,13 @@ export default function Developer() {
                           className="w-full h-full object-cover"
                         />
                         {isActive && (
-                          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="absolute inset-0 bg-brand-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <motion.button
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.95 }}
-                              className="w-14 h-14 bg-[#e8e4db] rounded-full flex items-center justify-center shadow-lg"
+                              className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg"
                             >
-                              <ArrowUpRight size={22} className="text-[#1c1c1c]" />
+                              <ArrowUpRight size={22} className="text-brand-blue" />
                             </motion.button>
                           </div>
                         )}
@@ -208,14 +206,14 @@ export default function Developer() {
                       transition={{ duration: 0.3 }}
                       className="text-center"
                     >
-                      <motion.h2 layoutId={`name-${TEAM_MEMBERS[currentIndex].id}`} className="font-serif text-3xl mb-3">
+                      <motion.h2 layoutId={`name-${TEAM_MEMBERS[currentIndex].id}`} className="font-heading font-bold text-3xl mb-3 text-brand-navy">
                         {TEAM_MEMBERS[currentIndex].name}
                       </motion.h2>
                       <motion.div layoutId={`roles-${TEAM_MEMBERS[currentIndex].id}`} className="flex gap-2 justify-center mb-8">
                         {TEAM_MEMBERS[currentIndex].roles.map((role) => (
                           <span
                             key={role}
-                            className="text-[9px] font-semibold tracking-widest uppercase border border-[#d4d1cb] px-3 py-1 rounded-full text-[#4a4a4a]"
+                            className="text-[9px] font-bold tracking-widest uppercase bg-[#EEF2FF] text-brand-blue px-3 py-1 rounded-full"
                           >
                             {role}
                           </span>
@@ -228,16 +226,16 @@ export default function Developer() {
                     <button
                       onClick={prevSlide}
                       disabled={currentIndex === 0}
-                      className={`w-14 h-8 border border-[#1c1c1c] rounded-full flex items-center justify-center transition-colors ${currentIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1c1c1c] hover:text-[#f4f1ea]'}`}
+                      className={`w-14 h-8 border border-brand-navy rounded-full flex items-center justify-center transition-colors ${currentIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-brand-navy hover:text-white text-brand-navy'}`}
                     >
-                      <ArrowLeft size={16} strokeWidth={1.5} />
+                      <ArrowLeft size={16} strokeWidth={2} />
                     </button>
                     <button
                       onClick={nextSlide}
                       disabled={currentIndex === TEAM_MEMBERS.length - 1}
-                      className={`w-14 h-8 border border-[#1c1c1c] rounded-full flex items-center justify-center transition-colors ${currentIndex === TEAM_MEMBERS.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1c1c1c] hover:text-[#f4f1ea]'}`}
+                      className={`w-14 h-8 border border-brand-navy rounded-full flex items-center justify-center transition-colors ${currentIndex === TEAM_MEMBERS.length - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-brand-navy hover:text-white text-brand-navy'}`}
                     >
-                      <ArrowRight size={16} strokeWidth={1.5} />
+                      <ArrowRight size={16} strokeWidth={2} />
                     </button>
                   </div>
                 </div>
@@ -245,8 +243,8 @@ export default function Developer() {
 
               {/* Pagination */}
               <div className="absolute right-0 bottom-0 pb-8 pointer-events-none">
-                <span className="font-serif text-4xl">{currentIndex + 1}</span>
-                <span className="text-[#a09e98] text-xl font-serif"> / {TEAM_MEMBERS.length}</span>
+                <span className="font-heading font-bold text-4xl text-brand-navy">{currentIndex + 1}</span>
+                <span className="text-slate-400 text-xl font-heading font-medium"> / {TEAM_MEMBERS.length}</span>
               </div>
             </div>
           </motion.div>
@@ -262,7 +260,7 @@ export default function Developer() {
             <div className="flex justify-between items-center mb-8 pt-4">
               <button
                 onClick={() => setSelectedId(null)}
-                className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest hover:opacity-70 transition-opacity"
+                className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-navy hover:text-brand-blue transition-colors"
               >
                 <ArrowLeft size={18} /> BACK
               </button>
@@ -280,7 +278,7 @@ export default function Developer() {
                 {selectedMember.roles.map((role) => (
                   <span
                     key={role}
-                    className="text-[10px] font-semibold tracking-widest uppercase border border-[#d4d1cb] px-4 py-1.5 rounded-full text-[#4a4a4a]"
+                    className="text-[10px] font-bold tracking-widest uppercase bg-[#EEF2FF] text-brand-blue px-4 py-1.5 rounded-full"
                   >
                     {role}
                   </span>
@@ -288,7 +286,7 @@ export default function Developer() {
               </motion.div>
               <motion.h2
                 layoutId={`name-${selectedMember.id}`}
-                className="font-serif text-5xl md:text-7xl lg:text-[7rem] text-center leading-none tracking-tight"
+                className="font-heading font-bold text-5xl md:text-7xl lg:text-[7rem] text-center leading-none tracking-tight text-brand-navy"
               >
                 {selectedMember.name}
               </motion.h2>
@@ -299,7 +297,7 @@ export default function Developer() {
               {/* Expanded Image */}
               <motion.div
                 layoutId={`image-container-${selectedMember.id}`}
-                className="w-full lg:w-5/12 h-[500px] lg:h-[650px] relative shadow-2xl"
+                className="w-full lg:w-5/12 h-[500px] lg:h-[650px] relative shadow-2xl rounded-2xl overflow-hidden"
               >
                 <motion.img
                   layoutId={`image-${selectedMember.id}`}
@@ -314,16 +312,16 @@ export default function Developer() {
                 {/* Rotating Badge overlaying slightly */}
                 <div className="absolute -top-16 lg:-top-24 lg:-left-20 w-32 h-32 lg:w-40 lg:h-40 z-10">
                   <div className="relative w-full h-full animate-[spin_10s_linear_infinite] flex items-center justify-center">
-                    <svg viewBox="0 0 100 100" className="w-full h-full text-[#c1c3a6] drop-shadow-sm">
+                    <svg viewBox="0 0 100 100" className="w-full h-full text-brand-blue opacity-50 drop-shadow-sm">
                       <path id="curve" d="M 50 50 m -37 0 a 37 37 0 1 1 74 0 a 37 37 0 1 1 -74 0" fill="transparent" />
-                      <text className="text-[11px] uppercase tracking-[0.2em] font-semibold fill-[#1c1c1c]">
+                      <text className="text-[11px] uppercase tracking-[0.2em] font-bold fill-brand-navy">
                         <textPath href="#curve">
-                          • Schedule an appointment • Schedule an appointment
+                          • View Developer Profile • View Developer Profile
                         </textPath>
                       </text>
                     </svg>
-                    <div className="absolute inset-0 flex items-center justify-center bg-[#e0e2c8] rounded-full m-7 shadow-sm cursor-pointer hover:scale-105 transition-transform">
-                      <ArrowUpRight size={20} className="text-[#1c1c1c]" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-white border border-[#EEF2FF] rounded-full m-7 shadow-lg cursor-pointer hover:scale-105 transition-transform group">
+                      <ArrowUpRight size={20} className="text-brand-blue group-hover:text-brand-navy transition-colors" />
                     </div>
                   </div>
                 </div>
@@ -334,7 +332,7 @@ export default function Developer() {
                   transition={{ delay: 0.3 }}
                   className="mb-16 mt-20 lg:mt-0"
                 >
-                  <p className="text-lg lg:text-xl leading-relaxed text-[#4a4a4a] max-w-lg font-light">
+                  <p className="text-lg lg:text-xl leading-relaxed text-slate-700 max-w-lg font-medium">
                     {selectedMember.bio}
                   </p>
                 </motion.div>
@@ -343,12 +341,12 @@ export default function Developer() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="flex gap-16 border-t border-[#d4d1cb] pt-8"
+                  className="flex gap-16 border-t border-slate-200 pt-8"
                 >
                   {selectedMember.stats.map((stat) => (
                     <div key={stat.label}>
-                      <div className="font-serif text-5xl mb-2 tracking-tight">{stat.value}</div>
-                      <div className="text-xs font-semibold tracking-wider uppercase text-[#a09e98] max-w-[100px] leading-tight">
+                      <div className="font-heading font-bold text-5xl mb-2 tracking-tight text-brand-navy">{stat.value}</div>
+                      <div className="text-xs font-bold tracking-wider uppercase text-slate-500 max-w-[100px] leading-tight">
                         {stat.label}
                       </div>
                     </div>

@@ -1,6 +1,21 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Menu } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Menu, Globe, Code } from 'lucide-react';
+
+const GithubIcon = ({ size = 24, className = '' }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.03c3.15-.38 6.5-1.5 6.5-7.1a5.8 5.8 0 0 0-1.5-3.8 5.3 5.3 0 0 0-.15-3.7s-1.2-.38-3.9 1.5a13.2 13.2 0 0 0-7 0C6.1 1.2 4.9 1.6 4.9 1.6a5.3 5.3 0 0 0-.15 3.7 5.8 5.8 0 0 0-1.5 3.8c0 5.6 3.3 6.7 6.5 7.1a4.8 4.8 0 0 0-1 3.03v4"/>
+    <path d="M9 20c-3 1-5-1-6-3"/>
+  </svg>
+);
+
+const LinkedinIcon = ({ size = 24, className = '' }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+    <rect width="4" height="12" x="2" y="9"/>
+    <circle cx="4" cy="4" r="2"/>
+  </svg>
+);
 
 import developer1 from '../../../assets/developers/developer1.jpg';
 import developer2 from '../../../assets/developers/developer2.jpg';
@@ -14,67 +29,115 @@ const TEAM_MEMBERS = [
     id: '1',
     name: 'Rishabh Malviya',
     roles: ['TEAM LEAD'],
+    role: 'Team Lead',
     image: developer1,
     bio: 'Leads the vision and direction of EduGuide AI, keeping the team aligned from first idea to final release.',
+    contribution: 'Sets product direction and coordinates design, development and research across the team.',
     stats: [
       { label: 'Role', value: 'Lead' },
       { label: 'Focus', value: 'Vision' }
-    ]
+    ],
+    links: {
+      github: '#',
+      linkedin: '#',
+      portfolio: '#',
+      leetcode: '#'
+    }
   },
   {
     id: '2',
     name: 'Snehal Kushwaha',
     roles: ['BACKEND DEVELOPER'],
+    role: 'Backend Developer',
     image: developer2,
     bio: 'Builds and maintains the robust backend systems and APIs that power EduGuide AI.',
+    contribution: 'Builds and maintains the backend systems that power EduGuide AI.',
     stats: [
       { label: 'Role', value: 'Backend' },
       { label: 'Focus', value: 'Systems' }
-    ]
+    ],
+    links: {
+      github: '#',
+      linkedin: '#',
+      portfolio: '#',
+      leetcode: '#'
+    }
   },
   {
     id: '3',
     name: 'Rex Mantode',
     roles: ['FRONTEND DEVELOPER'],
+    role: 'Frontend Developer',
     image: developer3,
     bio: 'Crafts intuitive and engaging interfaces that students and staff use every day.',
+    contribution: 'Builds the interfaces students and staff use every day.',
     stats: [
       { label: 'Role', value: 'Frontend' },
       { label: 'Focus', value: 'UI/UX' }
-    ]
+    ],
+    links: {
+      github: '#',
+      linkedin: '#',
+      portfolio: '#',
+      leetcode: '#'
+    }
   },
   {
     id: '4',
     name: 'Sumit Ransurma',
     roles: ['RESEARCH', 'DATA'],
+    role: 'Research & Data Collection',
     image: developer4,
     bio: 'Gathers and organizes the crucial research and data that shapes EduGuide AI\'s insights.',
+    contribution: 'Gathers and organizes the research that shapes EduGuide AI\'s insights.',
     stats: [
       { label: 'Role', value: 'Research' },
       { label: 'Focus', value: 'Data' }
-    ]
+    ],
+    links: {
+      github: '#',
+      linkedin: '#',
+      portfolio: '#',
+      leetcode: '#'
+    }
   },
   {
     id: '5',
     name: 'Shruti Tiwari',
     roles: ['OPERATIONS', 'ADMIN'],
+    role: 'Operations & Notion Admin',
     image: developer5,
     bio: 'Keeps the team highly organized and ensures all project documentation is completely up to date.',
+    contribution: 'Keeps the team organized and documentation up to date.',
     stats: [
       { label: 'Role', value: 'Ops' },
       { label: 'Focus', value: 'Admin' }
-    ]
+    ],
+    links: {
+      github: '#',
+      linkedin: '#',
+      portfolio: '#',
+      leetcode: '#'
+    }
   },
   {
     id: '6',
     name: 'Neha Kumari Sah',
     roles: ['UI/UX', 'DOCUMENTATION'],
+    role: 'UI/UX & Documentation',
     image: developer6,
     bio: 'Shapes the product experience with thoughtful design and documents how EduGuide AI works.',
+    contribution: 'Shapes the product experience and documents how EduGuide AI works.',
     stats: [
       { label: 'Role', value: 'Design' },
       { label: 'Focus', value: 'Docs' }
-    ]
+    ],
+    links: {
+      github: '#',
+      linkedin: '#',
+      portfolio: '#',
+      leetcode: '#'
+    }
   }
 ];
 
@@ -170,7 +233,7 @@ export default function Developer() {
                           opacity: style.opacity
                         }}
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                        className={`absolute w-full h-full origin-left shadow-2xl rounded-xl overflow-hidden bg-slate-200 ${isActive ? 'cursor-pointer group' : ''}`}
+                        className={`absolute w-full h-full origin-left shadow-2xl rounded-2xl overflow-hidden bg-slate-200 ${isActive ? 'cursor-pointer group' : ''}`}
                         onClick={() => isActive && setSelectedId(member.id)}
                       >
                         <motion.img
@@ -307,20 +370,20 @@ export default function Developer() {
                 />
               </motion.div>
 
-              {/* Bio & Stats */}
+              {/* Bio, Testimonial & Contact Card */}
               <div className="w-full lg:w-7/12 flex flex-col justify-center relative">
                 {/* Rotating Badge overlaying slightly */}
-                <div className="absolute -top-16 lg:-top-24 lg:-left-20 w-32 h-32 lg:w-40 lg:h-40 z-10">
+                <div className="absolute -top-16 lg:-top-24 lg:-left-20 w-32 h-32 lg:w-40 lg:h-40 z-10 pointer-events-none hidden lg:block">
                   <div className="relative w-full h-full animate-[spin_10s_linear_infinite] flex items-center justify-center">
                     <svg viewBox="0 0 100 100" className="w-full h-full text-brand-blue opacity-50 drop-shadow-sm">
                       <path id="curve" d="M 50 50 m -37 0 a 37 37 0 1 1 74 0 a 37 37 0 1 1 -74 0" fill="transparent" />
                       <text className="text-[11px] uppercase tracking-[0.2em] font-bold fill-brand-navy">
                         <textPath href="#curve">
-                          • View Developer Profile • View Developer Profile
+                          • Connect on LinkedIn • Connect on LinkedIn
                         </textPath>
                       </text>
                     </svg>
-                    <div className="absolute inset-0 flex items-center justify-center bg-white border border-[#EEF2FF] rounded-full m-7 shadow-lg cursor-pointer hover:scale-105 transition-transform group">
+                    <div className="absolute inset-0 flex items-center justify-center bg-white border border-[#EEF2FF] rounded-full m-7 shadow-lg pointer-events-auto cursor-pointer hover:scale-105 transition-transform group" onClick={() => window.open(selectedMember.links.linkedin, '_blank')}>
                       <ArrowUpRight size={20} className="text-brand-blue group-hover:text-brand-navy transition-colors" />
                     </div>
                   </div>
@@ -330,27 +393,42 @@ export default function Developer() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="mb-16 mt-20 lg:mt-0"
+                  className="mb-12 mt-10 lg:mt-0"
                 >
-                  <p className="text-lg lg:text-xl leading-relaxed text-slate-700 max-w-lg font-medium">
-                    {selectedMember.bio}
+                  <p className="text-xl lg:text-3xl leading-relaxed text-slate-700 max-w-xl font-heading font-medium italic">
+                    "{selectedMember.contribution}"
                   </p>
                 </motion.div>
 
+                {/* Profile Card */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="flex gap-16 border-t border-slate-200 pt-8"
+                  className="bg-white rounded-[2rem] p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 max-w-xl"
                 >
-                  {selectedMember.stats.map((stat) => (
-                    <div key={stat.label}>
-                      <div className="font-heading font-bold text-5xl mb-2 tracking-tight text-brand-navy">{stat.value}</div>
-                      <div className="text-xs font-bold tracking-wider uppercase text-slate-500 max-w-[100px] leading-tight">
-                        {stat.label}
-                      </div>
+                  <div className="mb-10">
+                    <h3 className="text-xs font-bold tracking-widest uppercase text-brand-blue mb-3">Role in the team</h3>
+                    <p className="font-heading font-bold text-3xl lg:text-4xl text-brand-navy">{selectedMember.role}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xs font-bold tracking-widest uppercase text-slate-400 mb-4">Connect & Explore</h3>
+                    <div className="flex gap-4">
+                      <a href={selectedMember.links.linkedin} target="_blank" rel="noreferrer" className="w-14 h-14 bg-[#FAFBFC] hover:bg-[#EEF2FF] rounded-full flex items-center justify-center text-slate-500 hover:text-brand-blue transition-colors group">
+                        <LinkedinIcon size={22} className="group-hover:scale-110 transition-transform" />
+                      </a>
+                      <a href={selectedMember.links.github} target="_blank" rel="noreferrer" className="w-14 h-14 bg-[#FAFBFC] hover:bg-[#EEF2FF] rounded-full flex items-center justify-center text-slate-500 hover:text-brand-blue transition-colors group">
+                        <GithubIcon size={22} className="group-hover:scale-110 transition-transform" />
+                      </a>
+                      <a href={selectedMember.links.portfolio} target="_blank" rel="noreferrer" className="w-14 h-14 bg-[#FAFBFC] hover:bg-[#EEF2FF] rounded-full flex items-center justify-center text-slate-500 hover:text-brand-blue transition-colors group">
+                        <Globe size={22} className="group-hover:scale-110 transition-transform" />
+                      </a>
+                      <a href={selectedMember.links.leetcode} target="_blank" rel="noreferrer" className="w-14 h-14 bg-[#FAFBFC] hover:bg-[#EEF2FF] rounded-full flex items-center justify-center text-slate-500 hover:text-brand-blue transition-colors group">
+                        <Code size={22} className="group-hover:scale-110 transition-transform" />
+                      </a>
                     </div>
-                  ))}
+                  </div>
                 </motion.div>
               </div>
             </div>

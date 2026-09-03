@@ -10,9 +10,11 @@ import {
   Camera, 
   PhoneOff, 
   Video, 
+  VideoOff,
   AlertCircle,
   Sparkles,
   Mic,
+  MicOff,
   ShieldCheck
 } from 'lucide-react';
 
@@ -25,6 +27,8 @@ export default function PISegmentCard({ studentId }) {
   // Live Camera / PI Session state
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [camError, setCamError] = useState(null);
+  const [isMuted, setIsMuted] = useState(true); // Default muted to prevent feedback loop
+  const [isVideoOff, setIsVideoOff] = useState(false);
   const videoRef = useRef(null);
   const streamRef = useRef(null);
 
@@ -68,12 +72,19 @@ export default function PISegmentCard({ studentId }) {
   const startCamera = async () => {
     setCamError(null);
     try {
+      // Audio is false initially because it's a mock view, but we can toggle the state
       const stream = await navigator.mediaDevices.getUserMedia({ 
         video: { width: { ideal: 640 }, height: { ideal: 360 } }, 
-        audio: false 
+        audio: true 
       });
+      
+      // Initial mute state
+      stream.getAudioTracks().forEach(track => track.enabled = false);
+
       streamRef.current = stream;
       setIsCameraActive(true);
+      setIsMuted(true);
+      setIsVideoOff(false);
       
       // Delay slightly for DOM ref binding
       setTimeout(() => {
@@ -97,6 +108,22 @@ export default function PISegmentCard({ studentId }) {
     }
     setIsCameraActive(false);
     setCamError(null);
+  };
+
+  const toggleMute = () => {
+    if (streamRef.current) {
+      const audioTracks = streamRef.current.getAudioTracks();
+      audioTracks.forEach(track => track.enabled = !track.enabled);
+      setIsMuted(!audioTracks.some(track => track.enabled));
+    }
+  };
+
+  const toggleVideo = () => {
+    if (streamRef.current) {
+      const videoTracks = streamRef.current.getVideoTracks();
+      videoTracks.forEach(track => track.enabled = !track.enabled);
+      setIsVideoOff(!videoTracks.some(track => track.enabled));
+    }
   };
 
   const hasPI = piHistory.length > 0 || (interestData && interestData.suggestions?.length > 0);
@@ -221,7 +248,7 @@ export default function PISegmentCard({ studentId }) {
               ref={videoRef}
               autoPlay
               playsInline
-              muted
+              muted // Always muted locally to prevent feedback loop
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
 
@@ -235,25 +262,64 @@ export default function PISegmentCard({ studentId }) {
             </div>
           </div>
 
-          {/* Leave Button inside video container */}
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0.75rem' }}>
+          {/* Controls bar inside video container */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
+            <button
+              onClick={toggleMute}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '40px',
+                height: '40px',
+                background: isMuted ? '#EF4444' : 'rgba(255,255,255,0.15)',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '50%',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+              title={isMuted ? 'Unmute Microphone' : 'Mute Microphone'}
+            >
+              {isMuted ? <MicOff size={18} /> : <Mic size={18} />}
+            </button>
+            <button
+              onClick={toggleVideo}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '40px',
+                height: '40px',
+                background: isVideoOff ? '#EF4444' : 'rgba(255,255,255,0.15)',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '50%',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+              title={isVideoOff ? 'Turn Camera On' : 'Turn Camera Off'}
+            >
+              {isVideoOff ? <VideoOff size={18} /> : <Video size={18} />}
+            </button>
             <button
               onClick={stopCamera}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                padding: '0.5rem 1.25rem',
+                padding: '0 1.25rem',
+                height: '40px',
                 background: '#EF4444',
                 color: '#FFFFFF',
                 border: 'none',
-                borderRadius: '8px',
+                borderRadius: '20px',
                 fontWeight: 700,
                 fontSize: '0.85rem',
                 cursor: 'pointer'
               }}
             >
-              <PhoneOff size={16} /> Leave & End Live Interview
+              <PhoneOff size={16} /> Leave
             </button>
           </div>
         </div>

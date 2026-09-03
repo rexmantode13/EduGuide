@@ -93,7 +93,7 @@ export default function StaffLogin() {
         </div>
 
         {/* Role Tab Selector */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.4rem', background: '#F1F5F9', padding: '0.3rem', borderRadius: '12px', marginBottom: '1.25rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', background: '#F1F5F9', padding: '0.3rem', borderRadius: '12px', marginBottom: '1.25rem' }}>
           <button 
             type="button"
             onClick={() => setActiveRole('Admin')}
@@ -137,30 +137,7 @@ export default function StaffLogin() {
               transition: 'all 0.15s ease'
             }}
           >
-            <School size={14} /> Teacher
-          </button>
-
-          <button 
-            type="button"
-            onClick={() => setActiveRole('Counselor')}
-            style={{
-              padding: '0.6rem 0.4rem',
-              borderRadius: '9px',
-              border: 'none',
-              background: activeRole === 'Counselor' ? '#FFFFFF' : 'transparent',
-              color: activeRole === 'Counselor' ? '#2563EB' : '#64748B',
-              fontWeight: activeRole === 'Counselor' ? 700 : 500,
-              fontSize: '0.82rem',
-              cursor: 'pointer',
-              boxShadow: activeRole === 'Counselor' ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.35rem',
-              transition: 'all 0.15s ease'
-            }}
-          >
-            <UserCheck size={14} /> Counselor
+            <School size={14} /> Teacher & Counselor
           </button>
         </div>
 

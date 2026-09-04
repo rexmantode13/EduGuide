@@ -36,7 +36,8 @@ export default function MarksUpload() {
 
     try {
       const token = localStorage.getItem('eduguide_token');
-      const response = await fetch('http://localhost:5000/api/marks/upload', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://eduguide-mqyp.onrender.com/api';
+      const response = await fetch(`${apiUrl}/marks/upload`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

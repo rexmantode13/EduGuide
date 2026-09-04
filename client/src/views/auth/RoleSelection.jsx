@@ -161,34 +161,8 @@ export default function RoleSelection() {
                     <School size={22} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0F172A' }}>Class Teacher</div>
-                    <div style={{ fontSize: '0.78rem', color: '#64748B' }}>Marks upload, class overview & academic tracking</div>
-                  </div>
-                </button>
-
-                <button 
-                  onClick={() => handleSelectStaffRole('Counselor')}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '1rem',
-                    padding: '1rem 1.25rem',
-                    border: '1px solid #E2E8F0',
-                    borderRadius: '12px',
-                    background: '#F8FAFC',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseOver={(e) => { e.currentTarget.style.borderColor = '#2563EB'; e.currentTarget.style.background = '#EFF6FF'; }}
-                  onMouseOut={(e) => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.background = '#F8FAFC'; }}
-                >
-                  <div style={{ padding: '0.6rem', background: '#F0F9FF', color: '#0284C7', borderRadius: '10px' }}>
-                    <UserCheck size={22} />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0F172A' }}>Career Counselor</div>
-                    <div style={{ fontSize: '0.78rem', color: '#64748B' }}>Personal interviews, qualitative feedback & review queue</div>
+                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0F172A' }}>Teacher & Counselor</div>
+                    <div style={{ fontSize: '0.78rem', color: '#64748B' }}>Marks upload, class overview & personal interviews</div>
                   </div>
                 </button>
               </div>

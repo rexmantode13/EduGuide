@@ -80,7 +80,7 @@ export default function Sidebar() {
               <UserCheck size={20} />
               <span>PI Sessions</span>
             </NavLink>
-            <NavLink to="/staff/review-queue" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`}>
+            <NavLink to="/staff/review-queue" className={({ isActive }) => `sidebar-nav-item ${isActive ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); alert('This feature will come in the next phase.'); }}>
               <ShieldAlert size={20} />
               <span>AI Review Queue</span>
             </NavLink>
